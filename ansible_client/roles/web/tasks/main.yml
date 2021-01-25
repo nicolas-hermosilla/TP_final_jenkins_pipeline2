@@ -1,22 +1,25 @@
 ---
 # tasks file for roles/web
-- name : Install docker
-  apt:
-    name: docker-compose
-    state: latest
-    update_cache: true
+---
+- name: Configure Instance
+  hosts: web
+  gather_facts: true
+  become: true
+  tasks:
+   - name: Install nginx
+      apt:
+        name: nginx
+        update_cache: true
 
 
-- name : Add user to docker group
-  user:
-     name : ubuntu
-     groups: docker
-     append: yes
-  become : yes
+   - name: Install git
+      apt:
+        name: git
+        state: present
+        update_cache: true
 
-- name : Clone a public repository
-  git:
-    repo: 'https://github.com/j0h3/cours_ynov'
-    dest: /home/ubuntu/cours_ynov
 
+   - name: Git clone
+      git:
+        repo: "https://github.com/nicolas-hermosilla/TP_final_jenkins_pipeline2 /var/www/html/"
 
