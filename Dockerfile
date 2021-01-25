@@ -9,4 +9,6 @@ RUN apt update && \
 USER ubuntu
 RUN mkdir /home/ubuntu/playbook && \
     ssh-keygen -t rsa -f /home/ubuntu/.ssh/id_rsa -N ''
-CMD ["/bin/bash"]
+WORKDIR /home/ubuntu/playbook
+
+ENTRYPOINT [ "ansible-playbook" ]
