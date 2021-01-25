@@ -1,8 +1,8 @@
 FROM jenkins/jenkins:latest
 USER root
 RUN apt update && \
-    apt install ansible -y && \
-    apt install openssh-server && \
+    apt -y install ansible && \
+    apt -y install openssh-server && \
     mkdir /var/run/sshd && \
     useradd -m -s /bin/bash ubuntu
 
@@ -12,4 +12,4 @@ RUN mkdir /home/ubuntu/playbook && \
 
 WORKDIR /home/ubuntu/playbook
 
-ENTRYPOINT [ "ansible-playbook"]
+ENTRYPOINT [ "ansible-playbook" ]
